@@ -1,0 +1,55 @@
+{
+  "clients": [
+    {
+      "id": "1",
+      "userName": "zusha",
+      "userEmail": "123@gmail.com",
+      "passWord": "123",
+      "wishlist": [],
+      "products": [
+        41,
+        43
+      ]
+    },
+    {
+      "id": "2",
+      "userName": "zusha",
+      "userEmail": "345@gmail.com",
+      "passWord": "345",
+      "wishlist": [],
+      "products": []
+    },
+    {
+      "id": "BVP3zWn",
+      "userName": "zusha",
+      "userEmail": "000@gmail.com",
+      "passWord": "000",
+      "wishlist": [],
+      "products": []
+    },
+    {
+      "id": "qKMrARR",
+      "userName": "x",
+      "userEmail": "1@d",
+      "passWord": "ddf",
+      "wishlist": [],
+      "products": []
+    },
+    {
+      "id": "lj81uaO",
+      "userName": "f",
+      "userEmail": "1@d",
+      "passWord": "",
+      "wishlist": [],
+      "products": []
+    },
+    {
+      "id": "aav0kPf",
+      "userName": "ale",
+      "userEmail": "ale@gmail.com",
+      "passWord": "123",
+      "wishlist": [],
+      "products": []
+    }
+  ]
+}
