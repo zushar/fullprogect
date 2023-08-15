@@ -49,6 +49,14 @@
       "passWord": "123",
       "wishlist": [],
       "products": []
+    },
+    {
+      "id": "DlnrOQf",
+      "userName": "avi",
+      "userEmail": "111@gmail.com",
+      "passWord": "111",
+      "wishlist": [],
+      "products": []
     }
   ]
 }

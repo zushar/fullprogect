@@ -15,7 +15,7 @@ const Login = (props) => {
 
     useEffect(()=>{
         setErrMsg('');
-    },[email,pass,``])
+    },[email,pass])
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -23,31 +23,29 @@ const Login = (props) => {
       try {
           const response = await axios.get(`${LOGIN_URL}?userEmail=${email}&passWord${pass}`)
           if(response.data.length===0){
-              throw new Error("not a user");
-          }
-          if(response.data[0].passWord !== pass){
-              throw new Error("nut the password.")
-          }
-          console.log(response.data[0])
-          props.setUser(()=>({
-              'id': response.data[0].id,
-              'userName': response.data[0].userName,
-              "userEmail": response.data[0].userEmail,
-              "passWord": response.data[0].passWord,
-              'wishlist': [],
-              'products': response.data[0].products
+              setErrMsg("not a user")
+          }else if(response.data[0].passWord !== pass){
+              setErrMsg("nut the password.")
+          }else {
+              console.log(response.data[0])
+              props.setUser(() => ({
+                  'id': response.data[0].id,
+                  'userName': response.data[0].userName,
+                  "userEmail": response.data[0].userEmail,
+                  "passWord": response.data[0].passWord,
+                  'wishlist': [],
+                  'products': response.data[0].products
 
-          }));
-          localStorage.setItem("user", JSON.stringify(response.data[0]));
-          props.setAut(true);
-          setEmail("");
-          setPass("");
-          navigate("/")
+              }));
+              localStorage.setItem("user", JSON.stringify(response.data[0]));
+              props.setAut(true);
+              setEmail("");
+              setPass("");
+              navigate("/")
+          }
       }catch (err) {
         setErrMsg("try agan")
       }
-        if(props.user.length>0)
-            console.log(props.user);
     }
 
     return (

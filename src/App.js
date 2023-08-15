@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Hedar from "./components/Hedar";
+import Header from "./components/Header";
 import Cort from "./pages/Cort"
 import "./App.css"
 import {useEffect, useState} from "react";
@@ -26,7 +26,7 @@ const App = () => {
     return (
         <Router>
             <div className="App">
-                <Hedar setUser={setUser} user={user} setAut={setAut
+                <Header setUser={setUser} user={user} setAut={setAut
                 } aut={aut}/>
                 <div className="content">
                     <Routes>

@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { AiOutlineShoppingCart} from "react-icons/ai";
 import {Link} from "react-router-dom";
 
-const Hedar = (props) => {
+const Header = (props) => {
 
     const handheldLogout = () => {
         localStorage.clear()
@@ -44,4 +44,4 @@ const Hedar = (props) => {
         </Navbar>
     );
 }
-export default Hedar;
+export default Header;

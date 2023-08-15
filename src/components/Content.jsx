@@ -6,17 +6,12 @@ const Content = ({aut, setUser, user, category}) => {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        try {
+        async function fetchData(){
             const response = await axios.get(`https://dummyjson.com/products/category/${category}`);
             setProducts(response.data.products);
-        } catch (error) {
-            console.error(error);
         }
-    };
+        fetchData().then(r => console.log(r));
+    }, [category]);
 
         const handleAdToCort = async (product) => {
             const items = [...user.products, product.id];
@@ -60,7 +55,7 @@ const Content = ({aut, setUser, user, category}) => {
                             <div className="row">
                                 {selectedProduct.images.map((img, index) => (
                                     <div key={index} className="col-md-4 mb-3">
-                                        <img src={img} alt={`Image ${index}`} className="img-thumbnail img-fluid" style={{ height: "200px" }} />
+                                        <img src={img} alt={`product ${index}`} className="img-thumbnail img-fluid" style={{ height: "200px" }} />
                                     </div>
                                 ))}
                             </div>
@@ -89,7 +84,7 @@ const Content = ({aut, setUser, user, category}) => {
                                     {aut && <button type={"button"} className={"btn btn-outline-primary"}
                                                     onClick={() => handleAdToCort(product)}>ad to cort</button>}
                                 </div>
-                                <img src={product.images[0]} alt={`Product ${product.id}`} className="card-img-top img-thumbnail img-fluid" style={{ height: "300px" }} />
+                                <img src={String(product.images[0])} alt={`Product ${product.id}`} className="card-img-top img-thumbnail img-fluid" style={{ height: "300px" }} />
                             </div>
                         </div>
                     </div>

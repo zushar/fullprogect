@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {toast} from "react-toastify";
+import axios from "../api/axios";
 
 const Register = () => {
     const [email,setEmail] = useState("");
@@ -17,21 +17,10 @@ const Register = () => {
             "products": []
 
         }
-        //nid to do vledion;
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        fetch("http://localhost:3001/clients", {
-            method: 'Post',
-            headers:{'content-type':'application/json'},
-            body: JSON.stringify(jsonData)
-        })
-            .then(res => {
-                toast.success('Registered successfully.')
-                navigate("/Login")
-            })
-            .catch(err=>{
-                toast.error('failed :'+err.message);
-            })
+        await axios.post(`http://localhost:3001/clients`,jsonData)
+        navigate("/Login")
     }
 
 

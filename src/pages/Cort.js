@@ -6,14 +6,15 @@ const Cort = (props) => {
     const [itemElements, setItemElements] = useState([]); // State to hold the item elements
 
     useEffect(() => {
-        fetchData();
+        fetchData().then(r => console.log(r));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fetchData = async () => {
         try {
             const response = await axios.get(`${LOGIN_URL}/${JSON.parse(localStorage.getItem("user")).id}`);
             localStorage.setItem("products", JSON.stringify(response.data.products));
-            fetchItems(); // Call fetchItems after fetching data
+            await fetchItems(); // Call fetchItems after fetching data
         } catch (error) {
             console.error(error);
         }
@@ -46,7 +47,7 @@ const Cort = (props) => {
                                         </button>
                                     </div>
                                     <img
-                                        src={response.data.images[0]}
+                                        src={String(response.data.images[0])}
                                         alt={`Product ${response.data.id}`}
                                         className="card-img-top img-thumbnail img-fluid"
                                         style={{ height: "300px" }}
@@ -69,7 +70,7 @@ const Cort = (props) => {
         const itemsList = JSON.parse(localStorage.getItem("products"));
         const updatedItems = itemsList.filter((id) => id !== productId);
         localStorage.setItem("products", JSON.stringify(updatedItems));
-        fetchItems(); // Update the list after removing the product
+        await fetchItems(); // Update the list after removing the product
         const updateUser = {
             'id': props.user.id,
             'userName': props.user.userName,
