@@ -15,7 +15,7 @@ const Login = (props) => {
 
     useEffect(()=>{
         setErrMsg('');
-    },[email,pass])
+    },[email,pass,``])
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -29,8 +29,7 @@ const Login = (props) => {
               throw new Error("nut the password.")
           }
           console.log(response.data[0])
-          props.setUser((prov)=>({
-              ...prov,
+          props.setUser(()=>({
               'id': response.data[0].id,
               'userName': response.data[0].userName,
               "userEmail": response.data[0].userEmail,
@@ -39,6 +38,7 @@ const Login = (props) => {
               'products': response.data[0].products
 
           }));
+          localStorage.setItem("user", JSON.stringify(response.data[0]));
           props.setAut(true);
           setEmail("");
           setPass("");
@@ -46,7 +46,8 @@ const Login = (props) => {
       }catch (err) {
         setErrMsg("try agan")
       }
-      console.log(props.user.id);
+        if(props.user.length>0)
+            console.log(props.user);
     }
 
     return (

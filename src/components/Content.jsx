@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "../api/axios";
 
-const Content = (props) => {
+const Content = ({aut, setUser, user, category}) => {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -11,28 +11,29 @@ const Content = (props) => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://dummyjson.com/products/category/womens-dresses');
+            const response = await axios.get(`https://dummyjson.com/products/category/${category}`);
             setProducts(response.data.products);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const handleAdToCort = async (product) => {
-        const items = [...props.user.products, product.id];
-        await props.setUser((prov)=>({
-            ...prov,
-            'products': items
-        }));
-        try {
-            await axios.put(`http://localhost:3001/clients/${props.user.id}`, props.user)
-            console.log(props.user.products)
+        const handleAdToCort = async (product) => {
+            const items = [...user.products, product.id];
+            console.log(items)
+            const updateUser = {
+                'id': user.id,
+                'userName': user.userName,
+                "userEmail": user.userEmail,
+                "passWord": user.passWord,
+                'wishlist': user.wishlist,
+                'products': items
+            };
+            await axios.put(`http://localhost:3001/clients/${user.id}`, updateUser)
+            setUser(updateUser)
             alert(`product ${product.title} as ban add do cort`)
-        } catch (error) {
-            console.error(error);
         }
 
-    }
 
     const handleOpenModal = (product) => {
         setSelectedProduct(product);
@@ -85,8 +86,8 @@ const Content = (props) => {
                                     <button type="button" className="btn btn-outline-primary" onClick={() => handleOpenModal(product)}>
                                         View More Photos
                                     </button>
-                                    {props.aut && <button type={"button"} className={"btn btn-outline-primary"}
-                                             onClick={() => handleAdToCort(product)}>ad to cort</button>}
+                                    {aut && <button type={"button"} className={"btn btn-outline-primary"}
+                                                    onClick={() => handleAdToCort(product)}>ad to cort</button>}
                                 </div>
                                 <img src={product.images[0]} alt={`Product ${product.id}`} className="card-img-top img-thumbnail img-fluid" style={{ height: "300px" }} />
                             </div>
