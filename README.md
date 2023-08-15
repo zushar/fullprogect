@@ -15,5 +15,7 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ### `json-server`
-npx json-server --watch database/db.json --port 3001
+npx json-server --watch database/db.json --port 3001### `json-server`
+### `github`
+https://github.com/zushar/fullprogect.git
 
